@@ -11,7 +11,7 @@ public class UtilsTest extends Search {
     Utils utils = new Utils();
 
     @Test
-    public void testCopyBoard() {
+    public void testCopyMatrix() {
         int[][] copyOfPuzzle = utils.copyMatrix(puzzle1);
         Assert.assertArrayEquals(copyOfPuzzle,puzzle1);
     }

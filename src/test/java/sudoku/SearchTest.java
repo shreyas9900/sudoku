@@ -67,7 +67,7 @@ public class SearchTest extends Search {
 
     @Test
     public void testSolve_Faultymatrix() {
-        SearchNode searchNode = utils.nextLocationToEdit(new SearchNode(faultyBoard, 0, -1));
+        SearchNode searchNode = utils.nextLocationToEdit(new SearchNode(faultyMatrix, 0, -1));
         FrontierNodeSet nodeSet = new FrontierNodeSet();
         nodeSet.add(searchNode);
         Search search = new Search();

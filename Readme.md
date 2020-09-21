@@ -23,6 +23,6 @@ There are tests that have the puzzles supplied as part of questionnaire.
 
 - BenchMarkTest.java has a test that benchmarks the performance of the application.
 
-- I have made an assumption that this is a 9 X 9 sudoku board. But the same solution works for 16 X 16
+- I have made an assumption that this is a 9 X 9 sudoku matrix. But the same solution works for 16 X 16.
 
 - At every index, validation is made to see what are the possible values that can be placed at that index and only after the validation is passed, SearchNode is being created and added to the current node's children collection. This is automatically helping in pruning branches that are not valid.
