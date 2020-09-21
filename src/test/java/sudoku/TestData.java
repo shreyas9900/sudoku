@@ -1,6 +1,6 @@
 package sudoku;
 
-public class SampleMetricsTest {
+public class TestData {
 
     public static final int[][] faultyMatrix = new int[][]{
             {5, 3, 0, 0, 7, 0, 0, 0, 0},

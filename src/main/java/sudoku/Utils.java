@@ -1,7 +1,5 @@
 package sudoku;
 
-import java.util.Arrays;
-
 public class Utils {
 
     public int[][] copyMatrix(int[][] matrix) {
@@ -45,7 +43,7 @@ public class Utils {
         return true;
     }
 
-    public SearchNode nextLocationToEdit(SearchNode searchNode){
+    public SearchNodeImpl nextLocationToEdit(SearchNodeImpl searchNode){
         if(searchNode.getMatrix() == null || searchNode.getMatrix().length == 0) {
             return searchNode;
         }

@@ -3,7 +3,7 @@ package sudoku;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static sudoku.SampleMetricsTest.*;
+import static sudoku.TestData.*;
 
 public class SearchTest extends Search {
 
@@ -11,7 +11,7 @@ public class SearchTest extends Search {
 
     @Test
     public void testPruneNode() {
-        SearchNode searchNode = new SearchNode(puzzle1, 0 , 0);
+        SearchNodeImpl searchNode = new SearchNodeImpl(puzzle1, 0 , 0);
         Boolean result = search.pruneNode(searchNode);
         Assert.assertEquals(Boolean.TRUE, result);
         Assert.assertEquals(2, searchNode.expand().size());
@@ -19,19 +19,19 @@ public class SearchTest extends Search {
 
     @Test
     public void testGetSolutionNodeNullCheck() {
-        SearchNode solutionNode = search.getSolutionNode();
+        SearchNodeImpl solutionNode = search.getSolutionNode();
         Assert.assertNull(solutionNode);
     }
 
     @Test
     public void testGetSolutionNodeSuccess_And_Test_Solve() {
-        SearchNode searchNode = utils.nextLocationToEdit(new SearchNode(puzzle1, 0, -1));
-        FrontierNodeSet nodeSet = new FrontierNodeSet();
+        SearchNodeImpl searchNode = utils.nextLocationToEdit(new SearchNodeImpl(puzzle1, 0, -1));
+        FrontierNodeSetImpl nodeSet = new FrontierNodeSetImpl();
         nodeSet.add(searchNode);
         Search search = new Search();
         search.candidateList = nodeSet;
         SolveStatus status = search.solve();
-        SearchNode solutionNode = search.getSolutionNode();
+        SearchNodeImpl solutionNode = search.getSolutionNode();
 
         Assert.assertEquals(SolveStatus.SOLUTION_FOUND, status);
         Assert.assertArrayEquals(solution1, solutionNode.getMatrix());
@@ -39,13 +39,13 @@ public class SearchTest extends Search {
 
     @Test
     public void testSolve_Invalid_Input() {
-        SearchNode searchNode = utils.nextLocationToEdit(new SearchNode(null, 0, -1));
-        FrontierNodeSet nodeSet = new FrontierNodeSet();
+        SearchNodeImpl searchNode = utils.nextLocationToEdit(new SearchNodeImpl(null, 0, -1));
+        FrontierNodeSetImpl nodeSet = new FrontierNodeSetImpl();
         nodeSet.add(searchNode);
         Search search = new Search();
         search.candidateList = nodeSet;
         SolveStatus status = search.solve();
-        SearchNode solutionNode = search.getSolutionNode();
+        SearchNodeImpl solutionNode = search.getSolutionNode();
 
         Assert.assertEquals(SolveStatus.NO_SOLUTION, status);
         Assert.assertNull(solutionNode);
@@ -53,13 +53,13 @@ public class SearchTest extends Search {
 
     @Test
     public void testSolve() {
-        SearchNode searchNode = utils.nextLocationToEdit(new SearchNode(puzzle2, 0, -1));
-        FrontierNodeSet nodeSet = new FrontierNodeSet();
+        SearchNodeImpl searchNode = utils.nextLocationToEdit(new SearchNodeImpl(puzzle2, 0, -1));
+        FrontierNodeSetImpl nodeSet = new FrontierNodeSetImpl();
         nodeSet.add(searchNode);
         Search search = new Search();
         search.candidateList = nodeSet;
         SolveStatus status = search.solve();
-        SearchNode solutionNode = search.getSolutionNode();
+        SearchNodeImpl solutionNode = search.getSolutionNode();
 
         Assert.assertEquals(SolveStatus.SOLUTION_FOUND, status);
         Assert.assertArrayEquals(solution2, solutionNode.getMatrix());
@@ -67,8 +67,8 @@ public class SearchTest extends Search {
 
     @Test
     public void testSolve_Faultymatrix() {
-        SearchNode searchNode = utils.nextLocationToEdit(new SearchNode(faultyMatrix, 0, -1));
-        FrontierNodeSet nodeSet = new FrontierNodeSet();
+        SearchNodeImpl searchNode = utils.nextLocationToEdit(new SearchNodeImpl(faultyMatrix, 0, -1));
+        FrontierNodeSetImpl nodeSet = new FrontierNodeSetImpl();
         nodeSet.add(searchNode);
         Search search = new Search();
         search.candidateList = nodeSet;

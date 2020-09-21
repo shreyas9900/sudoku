@@ -4,7 +4,7 @@ package sudoku;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static sudoku.SampleMetricsTest.puzzle1;
+import static sudoku.TestData.puzzle1;
 
 public class UtilsTest extends Search {
 
@@ -40,7 +40,7 @@ public class UtilsTest extends Search {
 
     @Test
     public void testNextLocationToEdit() {
-        SearchNode searchNode = new SearchNode(puzzle1,0,-1);
+        SearchNodeImpl searchNode = new SearchNodeImpl(puzzle1,0,-1);
         searchNode = utils.nextLocationToEdit(searchNode);
         Assert.assertEquals(searchNode.getRow(), 0);
         Assert.assertEquals(searchNode.getCol(), 2);

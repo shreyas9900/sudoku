@@ -3,12 +3,12 @@ package sudoku;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Search {
+public class Search{
 
     protected Utils utils;
     protected int counter;
-    protected FrontierNodeSet candidateList;
-    protected SearchNode solutionLeafNode;
+    protected FrontierNodeSetImpl candidateList;
+    protected SearchNodeImpl solutionLeafNode;
 
     public enum SolveStatus {
         SOLUTION_FOUND, NO_SOLUTION, TIME_OUT, REACHED_RESOURCE_LIMIT
@@ -32,7 +32,7 @@ public class Search {
      * @return The leaf solution node. It can be null if a solution has not
      *     been found yet.
      */
-    public SearchNode getSolutionNode() {
+    public SearchNodeImpl getSolutionNode() {
         return this.solutionLeafNode;
     }
 
@@ -49,7 +49,7 @@ public class Search {
      */
     public SolveStatus solve() {
         while (!candidateList.isEmpty()) {
-            SearchNode theNode = candidateList.removeNextOne();
+            SearchNodeImpl theNode = (SearchNodeImpl) candidateList.removeNextOne();
             if (theNode.isLastNodeInMatrix()) {
                 boolean result = pruneNode(theNode);
                 if(result) {
@@ -59,7 +59,7 @@ public class Search {
             else {
                 updateGlobalMetrics();
                 if (pruneNode(theNode)) {
-                    List<SearchNode> nodeList = theNode.expand();
+                    List<SearchNodeImpl> nodeList = theNode.expand();
                     if(nodeList != null && nodeList.size()>0){
                         candidateList.add(nodeList);
                     }
@@ -87,18 +87,18 @@ public class Search {
      *                   false otherwise.
      */
 
-    public boolean pruneNode(SearchNode theNode) {
+    public boolean pruneNode(SearchNodeImpl theNode) {
         int[][] currMatrix = theNode.getMatrix();
         int row = theNode.getRow();
         int col = theNode.getCol();
 
-        List<SearchNode> curChildDecisions =  new ArrayList<SearchNode>();
+        List<SearchNodeImpl> curChildDecisions =  new ArrayList<SearchNodeImpl>();
         boolean status = false;
         for(int i = 1 ; i<=9 ; i++){
             if(utils.isValid(currMatrix, i, row , col)){
                   int[][] currMatrixClone = utils.copyMatrix(currMatrix);
                     currMatrixClone[row][col] = i;
-                    SearchNode searchNode = new SearchNode(currMatrixClone,row,col);
+                    SearchNodeImpl searchNode = new SearchNodeImpl(currMatrixClone,row,col);
                     if (row <= 8 && col <= 8) {
                         searchNode = utils.nextLocationToEdit(searchNode);
                     }

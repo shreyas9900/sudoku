@@ -5,13 +5,13 @@ import org.junit.Test;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-import static sudoku.SampleMetricsTest.*;
+import static sudoku.TestData.*;
 
 public class BenchMarkTest extends Search {
     @Test
     public void testGetSolutionNodeSuccess_And_Test_Solve() {
-        SearchNode searchNodeDFS = utils.nextLocationToEdit(new SearchNode(puzzle2, 0, -1));
-        FrontierNodeSet nodeSetDFS = new FrontierNodeSet();
+        SearchNodeImpl searchNodeDFS = utils.nextLocationToEdit(new SearchNodeImpl(puzzle2, 0, -1));
+        FrontierNodeSetImpl nodeSetDFS = new FrontierNodeSetImpl();
         nodeSetDFS.setDfS(true);
         nodeSetDFS.add(searchNodeDFS);
         Search searchDFS = new Search();
@@ -19,8 +19,8 @@ public class BenchMarkTest extends Search {
         SolveStatus statusDFS = searchDFS.solve();
         float dfs  = searchDFS.getCounter();
 
-        SearchNode searchNodeBFS = utils.nextLocationToEdit(new SearchNode(puzzle2, 0, -1));
-        FrontierNodeSet nodeSetBFS = new FrontierNodeSet();
+        SearchNodeImpl searchNodeBFS = utils.nextLocationToEdit(new SearchNodeImpl(puzzle2, 0, -1));
+        FrontierNodeSetImpl nodeSetBFS = new FrontierNodeSetImpl();
         nodeSetBFS.setBfS(true);
         nodeSetBFS.add(searchNodeBFS);
         Search searchBFS = new Search();

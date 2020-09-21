@@ -13,16 +13,16 @@ import java.util.List;
  *
 
  */
-public class SearchNode {
+public class SearchNodeImpl implements sudoku.interfaces.SearchNode {
 
     private static final int MATRIX_SIZE = 9;
     private  int[][] matrix;
     private int row;
     private int col;
-    private List<SearchNode> searchNodeList = null;
+    private List<SearchNodeImpl> searchNodeList = null;
 
 
-    public SearchNode(int[][] matrix, int row, int col){
+    public SearchNodeImpl(int[][] matrix, int row, int col){
         if(validateMatrix(matrix)) {
             return;
         }
@@ -77,7 +77,7 @@ public class SearchNode {
      * Update Child decision nodes for given SearchNode
      * @param searchNodeList
      */
-    public void setChildDecisions(List<SearchNode> searchNodeList){
+    public void setChildDecisions(List<SearchNodeImpl> searchNodeList){
         this.searchNodeList = searchNodeList;
     }
 
@@ -88,7 +88,7 @@ public class SearchNode {
      * @return A list of child nodes
      */
 
-    public List<SearchNode> expand(){
+    public List<SearchNodeImpl> expand(){
         return searchNodeList;
     }
 
